@@ -1,3 +1,11 @@
+# web前端编码规范 #
+
+### Edit:    xingyang && yangjia  ###
+### Email:   xingyang@coamc.com && yangjia@coamc.com ###
+### Version:  1.0  ###
+
+
+
 ## 命名规则
 一，项目命名  
 
@@ -27,6 +35,7 @@
 
 	* 在你样式中的选择器总是要以上面前五类开头，然后在里面使用后代选择器。
 	* 如果这五类不能满足你的需求，你可以另外定义一个或多个大类，但必须符合单个字母+"-"为前缀的命名规则，即 .x- 的格式。
+	* 不要用left，right等抽象的动词，很容易造成代码互相覆盖，建议用表示具体模块用途的名词来表示。
 	
 后代选择器命名
 
@@ -83,6 +92,10 @@
 	* 缩进使用四个空格（tab）
 	* 嵌套的节点应该缩进
 	* 属性上使用双引号
+	* HTML页面不要写行内样式，应写到css文件里，用link rel引入。
+	* HTML页面当中尽量用class，少用id，id适用于做脚本绑定元素时使用。
+	* body,html标签里不要加样式。
+	* html标签不要用大写，要用小写表示
 二，DOCTYPE
 
 	* 页面开头大写
@@ -103,6 +116,32 @@
 
 	在编写HTML代码时，需要尽量避免多余的父节点；
 	在很多时候需要迭代和重构来使HTML变得更少。
+七，注释
+
+	模块间要加注释标明模块的具体含义。
+		<!-- header start -->
+		<div class="nav">
+		    ...
+		</div>
+		<!-- header end -->
+八，IE兼容模式
+
+	用 <meta> 标签可以指定页面应该用什么版本的IE来渲染；
+	如果你想要了解更多，请点击这里；
+	不同doctype在不同浏览器下会触发不同的渲染模式
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	    </head>
+	    ...
+	</html>
+
+具体看
+
+- 链接 ： [文字](https://hsivonen.fi/doctype/)
+
+
 
 ##CSS
 
@@ -112,22 +151,41 @@
 	
 二，空格
 
-	以下几种情况不需要空格
+以下几种情况不需要空格
 
-	* 属性名后                color :red;
-	* 多个规则的分隔符','前    background: rgba(0, 0, 0, .5)
-	* !important '!'后
-	* 属性值中'('后和')'前
-	* 行末不要有多余的空格
+1.	属性名后  
+ 
+   		color :red;
 
-	以下几种情况需要空格
+2.	多个规则的分隔符','前   
+
+  		background: rgba(0, 0, 0, .5)
+
+3.	!important '!'后
 	
-	* 属性值前				 background: rgba(0, 0, 0, .5)
-	* 选择器'>','+','~'前
-	* '{'前                  .dialog {}
-	* !important '!'前
-	* 属性值的','后			 background: rgba(0, 0, 0, .5)
-	* 注释'/*'后和'*/'前
+4.	属性值中'('后和')'前
+
+5.	行末不要有多余的空格
+
+以下几种情况需要空格
+	
+1.	属性值前	
+
+		background: rgba(0, 0, 0, .5)
+
+2.	选择器'>','+','~'前
+
+3.	'{'前
+
+	    .dialog {}
+
+4. !important '!'前
+	
+5. 属性值的','后
+
+		background: rgba(0, 0, 0, .5)
+	
+6. 注释'/*'后和'*/'前
 
 三，引号
 
@@ -170,123 +228,123 @@
 	        ...
 	    }
 	}
+	
+七，注释规范
+	
+#####文件顶部注释
+	/*
+	* @description: 模块名称
+	* @author: xingyang
+	* @update: 2015-10-30 18:32
+	*/
 
-七，杂项
+#####模块注释
+	/* module: module1 by  xingyang */ 
+	/* module: module2 by sunshilang */
+	
+八，杂项
 
-	不允许有空的规则；
+1.	不允许有空的规则；
 
-	元素选择器用小写字母；
-	
-	去掉小数点前面的0；
-	
-	去掉数字中不必要的小数点和末尾的0；
-	
-	属性值'0'后面不要加单位；
-	
-	同个属性不同前缀的写法需要在垂直方向保持对齐，具体参照右边的写法；
-	
-	无前缀的标准属性应该写在有前缀的属性后面；
-	
-	不要在同个规则里出现重复的属性，如果重复的属性是连续的则没关系；
-	
-	不要在一个文件里出现两个相同的规则；
-	
-	用 border: 0; 代替 border: none;；
-	
-	选择器不要超过4层（在scss中如果超过4层应该考虑用嵌套的方式来写）；
-	
-	发布的代码中不要有 @import；
-	
-	尽量少用'*'选择器。
+		/* not good */
+		.element {
+		}
 
+2.	元素选择器用小写字母；
 
-	
+		/* not good */
+		LI {
+		    ...
+		}
+		
+		/* good */
+		li {
+		    ...
+		}
 
-	/* not good */
-	.element {
-	}
+3.	去掉小数点前面的0；
 	
-	/* not good */
-	LI {
-	    ...
-	}
+		/* not good */
+		.element {
+		    color: rgba(0, 0, 0, 0.5);
+		}
+		
+		/* good */
+		.element {
+		    color: rgba(0, 0, 0, .5);
+		}
+
+4.	去掉数字中不必要的小数点和末尾的0；
+
+		/* not good */
+		.element {
+		    width: 50.0px;
+		}
+		
+		/* good */
+		.element {
+		    width: 50px;
+		}
+
+5.	属性值'0'后面不要加单位；
+
+		/* not good */
+		.element {
+		    width: 0px;
+		}
+		
+		/* good */
+		.element {
+		    width: 0;
+		}
+
+6.	同个属性不同前缀的写法需要在垂直方向保持对齐
+
+7.	无前缀的标准属性应该写在有前缀的属性后面；
+		
+		/* not good */
+		.element {
+		    border-radius: 3px;
+		    -webkit-border-radius: 3px;
+		    -moz-border-radius: 3px;
+		
+		    background: linear-gradient(to bottom, #fff 0, #eee 100%);
+		    background: -webkit-linear-gradient(top, #fff 0, #eee 100%);
+		    background: -moz-linear-gradient(top, #fff 0, #eee 100%);
+		}
+		
+		/* good */
+		.element {
+		    -webkit-border-radius: 3px;
+		       -moz-border-radius: 3px;
+		            border-radius: 3px;
+		
+		    background: -webkit-linear-gradient(top, #fff 0, #eee 100%);
+		    background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
+		    background:         linear-gradient(to bottom, #fff 0, #eee 100%);
+		}
 	
-	/* good */
-	li {
-	    ...
-	}
-	
-	/* not good */
-	.element {
-	    color: rgba(0, 0, 0, 0.5);
-	}
-	
-	/* good */
-	.element {
-	    color: rgba(0, 0, 0, .5);
-	}
-	
-	/* not good */
-	.element {
-	    width: 50.0px;
-	}
-	
-	/* good */
-	.element {
-	    width: 50px;
-	}
-	
-	/* not good */
-	.element {
-	    width: 0px;
-	}
-	
-	/* good */
-	.element {
-	    width: 0;
-	}
-	
-	/* not good */
-	.element {
-	    border-radius: 3px;
-	    -webkit-border-radius: 3px;
-	    -moz-border-radius: 3px;
-	
-	    background: linear-gradient(to bottom, #fff 0, #eee 100%);
-	    background: -webkit-linear-gradient(top, #fff 0, #eee 100%);
-	    background: -moz-linear-gradient(top, #fff 0, #eee 100%);
-	}
-	
-	/* good */
-	.element {
-	    -webkit-border-radius: 3px;
-	       -moz-border-radius: 3px;
-	            border-radius: 3px;
-	
-	    background: -webkit-linear-gradient(top, #fff 0, #eee 100%);
-	    background:    -moz-linear-gradient(top, #fff 0, #eee 100%);
-	    background:         linear-gradient(to bottom, #fff 0, #eee 100%);
-	}
-	
-	/* not good */
-	.element {
-	    color: rgb(0, 0, 0);
-	    width: 50px;
-	    color: rgba(0, 0, 0, .5);
-	}
-	
-	/* good */
-	.element {
-	    color: rgb(0, 0, 0);
-	    color: rgba(0, 0, 0, .5);
-	}
+8.	不要在同个规则里出现重复的属性，如果重复的属性是连续的则没关系；
+
+9.	不要在一个文件里出现两个相同的规则；
+
+10.	用 border: 0; 代替 border: none;；
+
+11.	选择器不要超过4层（在scss中如果超过4层应该考虑用嵌套的方式来写）；
+
+12.	发布的代码中不要有 @import；
+
+13.	尽量少用'*'选择器。
+
+14.	一个标签上引用的className不要过多，越少越好。
+
+15.	css文件里的中文字体都用英文来表示。	
 
 ##javaScript
 
 一，缩进
 	
 	使用soft tab（4个空格）。
-
 
 二，分号
 	
@@ -299,8 +357,6 @@
     break
     continue
     do-while
-
-	
 
 	/* var declaration */
 	var x = 1;
@@ -315,244 +371,265 @@
 
 三，空格
 
-	以下几种情况不需要空格：
+以下几种情况不需要空格：
 
-    对象的属性名后
-    前缀一元运算符后
-    后缀一元运算符前
-    函数调用括号前
-    无论是函数声明还是函数表达式，'('前不要空格
-    数组的'['后和']'前
-    对象的'{'后和'}'前
-    运算符'('后和')'前
+1. 对象的属性名后
 
-	以下几种情况需要空格：
+		// not good
+		var a = {
+		    b :1
+		};
+		
+		// good
+		var a = {
+		    b: 1
+		};
 
-    二元运算符前后
-    三元运算符'?:'前后
-    代码块'{'前
-    下列关键字前：else, while, catch, finally
-    下列关键字后：if, else, for, while, do, switch, case, try, catch, finally, with, return, typeof
-    单行注释'//'后（若单行注释和代码同行，则'//'前也需要），多行注释'*'后
-    对象的属性值前
-    for循环，分号后留有一个空格，前置条件如果有多个，逗号后留一个空格
-    无论是函数声明还是函数表达式，'{'前一定要有空格
-    函数的参数之间
+2.  前缀一元运算符后
 
+3.	后缀一元运算符前
 
-	
+		// not good
+		++ x;
+		y ++;
+		z = x?1:2;
+		
+		// good
+		++x;
+		y++;
+		z = x ? 1 : 2;
 
-	// not good
-	var a = {
-	    b :1
-	};
-	
-	// good
-	var a = {
-	    b: 1
-	};
-	
-	// not good
-	++ x;
-	y ++;
-	z = x?1:2;
-	
-	// good
-	++x;
-	y++;
-	z = x ? 1 : 2;
-	
-	// not good
-	var a = [ 1, 2 ];
-	
-	// good
-	var a = [1, 2];
-	
-	// not good
-	var a = ( 1+2 )*3;
-	
-	// good
-	var a = (1 + 2) * 3;
-	
-	// no space before '(', one space before '{', one space between function parameters
-	var doSomething = function(a, b, c) {
-	    // do something
-	};
-	
-	// no space before '('
-	doSomething(item);
-	
-	// not good
-	for(i=0;i<6;i++){
-	    x++;
-	}
-	
-	// good
-	for (i = 0; i < 6; i++) {
-	    x++;
-	}
+4.	函数调用括号前
+
+5.	无论是函数声明还是函数表达式，'('前不要空格
+
+6.	数组的'['后和']'前
+
+		// not good
+		var a = [ 1, 2 ];
+		
+		// good
+		var a = [1, 2];
+
+7.	对象的'{'后和'}'前
+
+8.	运算符'('后和')'前
+
+		// not good
+		var a = ( 1+2 )*3;
+		
+		// good
+		var a = (1 + 2) * 3;
+
+以下几种情况需要空格：
+
+1.	二元运算符前后
+
+2.	三元运算符'?:'前后
+
+3.	代码块'{'前
+
+4.	下列关键字前：else, while, catch, finally
+
+5.	下列关键字后：if, else, for, while, do, switch, case, try, catch, finally, with, return, typeof
+
+6.	单行注释'//'后（若单行注释和代码同行，则'//'前也需要），多行注释'*'后
+
+7.	对象的属性值前
+
+8.	for循环，分号后留有一个空格，前置条件如果有多个，逗号后留一个空格
+
+		// not good
+		for(i=0;i<6;i++){
+		    x++;
+		}
+		
+		// good
+		for (i = 0; i < 6; i++) {
+		    x++;
+		}
+9.  无论是函数声明还是函数表达式，'{'前一定要有空格
+
+10. 函数的参数之间
 
 四，空行
 	
-	以下几种情况需要空行：
+以下几种情况需要空行：
 
-    变量声明后（当变量声明在代码块的最后一行时，则无需空行）
-    注释前（当注释在代码块的第一行时，则无需空行）
-    代码块后（在函数调用、数组、对象中则无需空行）
-    文件最后保留一个空行
+1. 变量声明后（当变量声明在代码块的最后一行时，则无需空行）
+	
+		// need blank line after variable declaration
+		var x = 1;
+
+		// not need blank line when variable declaration is last expression in the current block
+		if (x >= 1) {
+		    var y = x + 1;
+		}
+		
+		var a = 2;
+
+2. 注释前（当注释在代码块的第一行时，则无需空行）
+
+		// need blank line before line comment
+		a++;
+		
+		function b() {
+		    // not need blank line when comment is first line of block
+		    return a;
+		}
+
+3. 代码块后（在函数调用、数组、对象中则无需空行）	
+    
+		// need blank line after blocks
+		for (var i = 0; i < 2; i++) {
+		    if (true) {
+		        return false;
+		    }
+		
+		    continue;
+		}
+		var obj = {
+		    foo: function() {
+		        return 1;
+		    },
+		
+		    bar: function() {
+		        return 2;
+		    }
+		};
+	    // not need blank line when in argument list, array, object
+		func(
+		    2,
+		    function() {
+		        a++;
+		    },
+		    3
+		);
+		
+		var foo = [
+		    2,
+		    function() {
+		        a++;
+		    },
+		    3
+		];		
+		var foo = {
+		    a: 2,
+		    b: function() {
+		        a++;
+		    },
+		    c: 3
+		};
+		
+4. 文件最后保留一个空行
 
 	
 	
-	// need blank line after variable declaration
-	var x = 1;
-	
-	// not need blank line when variable declaration is last expression in the current block
-	if (x >= 1) {
-	    var y = x + 1;
-	}
-	
-	var a = 2;
-	
-	// need blank line before line comment
-	a++;
-	
-	function b() {
-	    // not need blank line when comment is first line of block
-	    return a;
-	}
-	
-	// need blank line after blocks
-	for (var i = 0; i < 2; i++) {
-	    if (true) {
-	        return false;
-	    }
-	
-	    continue;
-	}
-	
-	var obj = {
-	    foo: function() {
-	        return 1;
-	    },
-	
-	    bar: function() {
-	        return 2;
-	    }
-	};
-	
-	// not need blank line when in argument list, array, object
-	func(
-	    2,
-	    function() {
-	        a++;
-	    },
-	    3
-	);
-	
-	var foo = [
-	    2,
-	    function() {
-	        a++;
-	    },
-	    3
-	];
 	
 	
-	var foo = {
-	    a: 2,
-	    b: function() {
-	        a++;
-	    },
-	    c: 3
-	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 五，换行
 
-	换行的地方，行末必须有','或者运算符；
+1. 换行的地方，行末必须有','或者运算符；
 
-	以下几种情况不需要换行：
+		// not good
+		var a = {
+		    b: 1
+		    , c: 2
+		};
+		
+		x = y
+		    ? 1 : 2;
+		
+		// good
+		var a = {
+		    b: 1,
+		    c: 2
+		};
+		
+		x = y ? 1 : 2;
 
-    下列关键字后：else, catch, finally
-    代码块'{'前
+2.	以下几种情况不需要换行：
 
-	以下几种情况需要换行：
+下列关键字后：else, catch, finally
+代码块'{'前
 
-    代码块'{'后和'}'前
-    变量赋值后
+		// no need line break with 'else', 'catch', 'finally'
+		if (condition) {
+		    ...
+		} else {
+		    ...
+		}
+		
+		try {
+		    ...
+		} catch (e) {
+		    ...
+		} finally {
+		    ...
+		}
+
+以下几种情况需要换行：
+
+代码块'{'后和'}'前
+		
+		// not good
+		function test()
+		{
+		    ...
+		}
+		
+		// good
+		function test() {
+		    ...
+		}
+
+变量赋值后
+
+		// not good
+		var a, foo = 7, b,
+		    c, bar = 8;
+		
+		// good
+		var a,
+		    foo = 7,
+		    b, c, bar = 8;
 
 	
+	
 
-	// not good
-	var a = {
-	    b: 1
-	    , c: 2
-	};
+
+
+
 	
-	x = y
-	    ? 1 : 2;
 	
-	// good
-	var a = {
-	    b: 1,
-	    c: 2
-	};
 	
-	x = y ? 1 : 2;
-	x = y ?
-	    1 : 2;
 	
-	// no need line break with 'else', 'catch', 'finally'
-	if (condition) {
-	    ...
-	} else {
-	    ...
-	}
-	
-	try {
-	    ...
-	} catch (e) {
-	    ...
-	} finally {
-	    ...
-	}
-	
-	// not good
-	function test()
-	{
-	    ...
-	}
-	
-	// good
-	function test() {
-	    ...
-	}
-	
-	// not good
-	var a, foo = 7, b,
-	    c, bar = 8;
-	
-	// good
-	var a,
-	    foo = 7,
-	    b, c, bar = 8;
 
 六，单行注释
 
-	双斜线后，必须跟一个空格；
+1. 双斜线后，必须跟一个空格；
 
-	缩进与下一行代码保持一致；
-	
-	可位于一个代码行的末尾，与代码间隔一个空格。 
+2. 缩进与下一行代码保持一致；
 
-	
+3. 可位于一个代码行的末尾，与代码间隔一个空格。
 
-	if (condition) {
-	    // if you made it here, then all security checks passed
-	    allowed();
-	}
-	
-	var zhangsan = 'zhangsan'; // one space after code
+		if (condition) {
+		    // if you made it here, then all security checks passed
+		    allowed();
+		}
+		
+		var zhangsan = 'zhangsan'; // one space after code
 
 七，多行注释
 
@@ -605,7 +682,7 @@
 
 八，引号
 
-	最外层统一使用单引号。
+最外层统一使用单引号。
 	
 
 	// not good
@@ -617,152 +694,193 @@
 
 九，变量命名
 
+1. 标准变量采用驼峰式命名（除了对象的属性外，主要是考虑到cgi返回的数据）
 	
-    标准变量采用驼峰式命名（除了对象的属性外，主要是考虑到cgi返回的数据）
-    'ID'在变量名中全大写
-    'URL'在变量名中全大写
-    'Android'在变量名中大写第一个字母
-    'iOS'在变量名中小写第一个，大写后两个字母
-    常量全大写，用下划线连接
-    构造函数，大写第一个字母
-    jquery对象必须以'$'开头命名
+		var thisIsMyName;
+
+2. 'ID'在变量名中全大写
+
+		var goodID;
+	
+3.	'URL'在变量名中全大写
+
+		var reportURL;
+
+4. 'Android'在变量名中大写第一个字母
+
+		var AndroidVersion;
+
+5. 'iOS'在变量名中小写第一个，大写后两个字母
+
+		var iOSVersion;
+
+6.	常量全大写，用下划线连接
+    
+    	var MAX_COUNT = 10;
+    
+7. 构造函数，大写第一个字母
+
+		function Person(name) {
+		    this.name = name;
+		}
+
+8.  jquery对象必须以'$'开头命名
+    
+		// not good
+		var body = $('body');
+		
+		// good
+		var $body = $('body');
+   
+9. boolean 类型的变量使用 is 或 has 开头。
+    
+	    var isReady = false;
+	    var hasMoreCommands = false;
 
 	
 	
-	var thisIsMyName;
 	
-	var goodID;
 	
-	var reportURL;
 	
-	var AndroidVersion;
 	
-	var iOSVersion;
 	
-	var MAX_COUNT = 10;
 	
-	function Person(name) {
-	    this.name = name;
-	}
 	
-	// not good
-	var body = $('body');
 	
-	// good
-	var $body = $('body');
+	
+	
+	
+	
+	
+	
+	
 
 
 十，变量声明
 
-	一个函数作用域中所有的变量声明尽量提到函数首部，用一个var声明，不允许出现两个连续的var声明。
+1. 一个函数作用域中所有的变量声明尽量提到函数首部，用一个var声明，不允许出现两个连续的var声明。
 
-	
-
-	function doSomethingWithItems(items) {
-	    // use one var
-	    var value = 10,
-	        result = value + 10,
-	        i,
-	        len;
-	
-	    for (i = 0, len = items.length; i < len; i++) {
-	        result += 10;
-	    }
-	}
+		function doSomethingWithItems(items) {
+		    // use one var
+		    var value = 10,
+		        result = value + 10,
+		        i,
+		        len;
+		
+		    for (i = 0, len = items.length; i < len; i++) {
+		        result += 10;
+		    }
+		}
 
 十一，函数
 
-	无论是函数声明还是函数表达式，'('前不要空格，但'{'前一定要有空格；
+1. 无论是函数声明还是函数表达式，'('前不要空格，但'{'前一定要有空格；
 	
-	函数调用括号前不需要空格；
-	
-	立即执行函数外必须包一层括号；
-	
-	不要给inline function命名；
-	
-	参数之间用', '分隔，注意逗号后有一个空格
+		// no space before '(', but one space before'{'
+		var doSomething = function(item) {
+		    // do something
+		};
+		function doSomething(item) {
+	    // do something
+		}
 
+2.	函数调用括号前不需要空格；
 	
+		// not good
+		doSomething (item);
+		
+		// good
+		doSomething(item);
+	
+3. 立即执行函数外必须包一层括号；
+		
+		// requires parentheses around immediately invoked function expressions
+		(function() {
+		    return 1;
+		})();
 
-	// no space before '(', but one space before'{'
-	var doSomething = function(item) {
-	    // do something
-	};
+4. 不要给inline function命名；
+
+		// not good
+		[1, 2].forEach(function x() {
+		    ...
+		});
+		
+		// good
+		[1, 2].forEach(function() {
+		    ...
+		});
+
+		// not good
+		var a = [1, 2, function a() {
+		    ...
+		}];
+		
+		// good
+		var a = [1, 2, function() {
+		    ...
+		}];
+
+5. 	参数之间用', '分隔，注意逗号后有一个空格	
 	
-	function doSomething(item) {
-	    // do something
-	}
+		// use ', ' between function parameters
+		var doSomething = function(a, b, c) {
+		    // do something
+		};
 	
-	// not good
-	doSomething (item);
-	
-	// good
-	doSomething(item);
-	
-	// requires parentheses around immediately invoked function expressions
-	(function() {
-	    return 1;
-	})();
-	
-	// not good
-	[1, 2].forEach(function x() {
-	    ...
-	});
-	
-	// good
-	[1, 2].forEach(function() {
-	    ...
-	});
-	
-	// not good
-	var a = [1, 2, function a() {
-	    ...
-	}];
-	
-	// good
-	var a = [1, 2, function() {
-	    ...
-	}];
-	
-	// use ', ' between function parameters
-	var doSomething = function(a, b, c) {
-	    // do something
-	};
+6. 	函数名 使用 动宾短语。
+	    
+	    function getStyle(element) {
+	    }
+
 
 十二，数组对象
 
-	对象属性名不需要加引号；
-
-	对象以缩进的形式书写，不要写在一行；
-
-	数组、对象最后不要有逗号。
-
+1. 对象属性名不需要加引号；
 	
+		// not good
+			var a = {
+			    'b': 1
+			};
+		//good
+		var a = {b: 1};
+2. 对象以缩进的形式书写，不要写在一行；
+		
+3. 数组、对象最后不要有逗号。
 
-	// not good
-	var a = {
-	    'b': 1
-	};
-	
-	var a = {b: 1};
-	
-	var a = {
-	    b: 1,
-	    c: 2,
-	};
-	
-	// good
-	var a = {
-	    b: 1,
-	    c: 2
-	};
+		var a = {
+		    b: 1,
+		    c: 2,
+		};
+		
+		// good
+		var a = {
+		    b: 1,
+		    c: 2
+		};
+4. 遍历数组不使用 for in。
+
+	数组对象可能存在数字以外的属性, 这种情况下 for in 不会得到正确结果.
+
+		示例：
+		
+		var arr = ['a', 'b', 'c'];
+		arr.other = 'other things'; // 这里仅作演示, 实际中应使用Object类型
+		
+		// 正确的遍历方式
+		for (var i = 0, len = arr.length; i < len; i++) {
+			console.log(i);
+		}
+		
+		// 错误的遍历方式
+		for (i in arr) {
+			console.log(i);
+		}
 
 十三，括号
 
-	下列关键字后必须有大括号（即使代码块的内容只有一行）：if, else, for, while, do, switch, try, catch, finally, with。
-
+下列关键字后必须有大括号（即使代码块的内容只有一行）：if, else, for, while, do, switch, try, catch, finally, with。
 	
-
 	// not good
 	if (condition)
 	    doSomething();
@@ -774,165 +892,162 @@
 
 十三，null
 	
-	适用场景：
+适用场景：
 
-    初始化一个将来可能被赋值为对象的变量
-    与已经初始化的变量做比较
-    作为一个参数为对象的函数的调用传参
-    作为一个返回对象的函数的返回值
+1. 初始化一个将来可能被赋值为对象的变量
 
-	不适用场景：
+2. 与已经初始化的变量做比较
 
-    不要用null来判断函数调用时有无传参
-    不要与未初始化的变量做比较
+3. 作为一个参数为对象的函数的调用传参
 
-	
+4. 作为一个返回对象的函数的返回值
 
-	// not good
-	function test(a, b) {
-	    if (b === null) {
-	        // not mean b is not supply
-	        ...
-	    }
-	}
+不适用场景：
+
+1. 不要用null来判断函数调用时有无传参
+
+		// not good
+		function test(a, b) {
+		    if (b === null) {
+		        // not mean b is not supply
+		        ...
+		    }
+		}
+2. 不要与未初始化的变量做比较
+
+		var a;
 	
-	var a;
-	
-	if (a === null) {
-	    ...
-	}
-	
-	// good
-	var a = null;
-	
-	if (a === null) {
-	    ...
-	}
+		if (a === null) {
+		    ...
+		}
+
+		// good
+		var a = null;
+		
+		if (a === null) {
+		    ...
+		}	
 
 十四，nudefined
 	
-	永远不要直接使用undefined进行变量判断；
+1. 永远不要直接使用undefined进行变量判断；
 
-	使用typeof和字符串'undefined'对变量进行判断。
+		// not good
+		if (person === undefined) {
+		    ...
+		}
 
+2. 使用typeof和字符串'undefined'对变量进行判断。
+			
+		// good
+		if (typeof person === 'undefined') {
+		    ...
+		}
 	
-
-	// not good
-	if (person === undefined) {
-	    ...
-	}
-	
-	// good
-	if (typeof person === 'undefined') {
-	    ...
-	}
-
 十五，jshint
 
-	用'===', '!=='代替'==', '!='；
+1. 用'===', '!=='代替'==', '!='；
+	
+		// not good
+		if (a == 1) {
+		    a++;
+		}
+		
+		// good
+		if (a === 1) {
+		    a++;
+		}
 
-	for-in里一定要有hasOwnProperty的判断；
-	
-	不要在内置对象的原型上添加方法，如Array, Date；
-	
-	不要在内层作用域的代码里声明了变量，之后却访问到了外层作用域的同名变量；
-	
-	变量不要先使用后声明；
-	
-	不要在一句代码中单单使用构造函数，记得将其赋值给某个变量；
-	
-	不要在同个作用域下声明同名变量；
-	
-	不要在一些不需要的地方加括号，例：delete(a.b)；
-	
-	不要使用未声明的变量（全局变量需要加到.jshintrc文件的globals属性里面）；
-	
-	不要声明了变量却不使用；
-	
-	不要在应该做比较的地方做赋值；
-	
-	debugger不要出现在提交的代码里；
-	
-	数组中不要存在空元素；
-	
-	不要在循环内部声明函数；
-	
-	不要像这样使用构造函数，例：new function () { ... }, new Object；
+2. for-in里一定要有hasOwnProperty的判断；
 
+		// good
+		for (key in obj) {
+		    if (obj.hasOwnProperty(key)) {
+		        // be sure that obj[key] belongs to the object and was not inherited
+		        console.log(obj[key]);
+		    }
+		}
 
+3. 不要在内置对象的原型上添加方法，如Array, Date；
+
+		// not good
+		Array.prototype.count = function(value) {
+		    return 4;
+		};
+
+4. 	不要在内层作用域的代码里声明了变量，之后却访问到了外层作用域的同名变量；
+	
+		// not good
+		var x = 1;
+		
+		function test() {
+		    if (true) {
+		        var x = 0;
+		    }
+		
+		    x += 1;
+		}
+	
+5. 	变量不要先使用后声明；
 	
 
-	// not good
-	if (a == 1) {
-	    a++;
-	}
+		// not good
+		function test() {
+		    console.log(x);
+		
+		    var x = 1;
+		}
 	
-	// good
-	if (a === 1) {
-	    a++;
-	}
+6.	不要在一句代码中单单使用构造函数，记得将其赋值给某个变量；
+
+		// not good
+		new Person();
+		
+		// good
+		var person = new Person();
 	
-	// good
-	for (key in obj) {
-	    if (obj.hasOwnProperty(key)) {
-	        // be sure that obj[key] belongs to the object and was not inherited
-	        console.log(obj[key]);
-	    }
-	}
+7.	不要在同个作用域下声明同名变量；
+
+8.	不要在一些不需要的地方加括号，例：delete(a.b)；
+
+		// not good
+		delete(obj.attr);
+		
+		// good
+		delete obj.attr;
+
+9. 不要使用未声明的变量（全局变量需要加到.jshintrc文件的globals属性里面）；
+		
+10. 不要声明了变量却不使用；
+ 
+11. 不要在应该做比较的地方做赋值； 
+
+		// not good
+		if (a = 10) {
+		    a++;
+		}
+ 
+12. debugger不要出现在提交的代码里；	
 	
-	// not good
-	Array.prototype.count = function(value) {
-	    return 4;
-	};
-	
-	// not good
-	var x = 1;
-	
-	function test() {
-	    if (true) {
-	        var x = 0;
-	    }
-	
-	    x += 1;
-	}
-	
-	// not good
-	function test() {
-	    console.log(x);
-	
-	    var x = 1;
-	}
-	
-	// not good
-	new Person();
-	
-	// good
-	var person = new Person();
-	
-	// not good
-	delete(obj.attr);
-	
-	// good
-	delete obj.attr;
-	
-	// not good
-	if (a = 10) {
-	    a++;
-	}
-	
-	// not good
-	var a = [1, , , 2, 3];
-	
-	// not good
-	var nums = [];
-	
-	for (var i = 0; i < 10; i++) {
-	    (function(i) {
-	        nums[i] = function(j) {
-	            return i + j;
-	        };
-	    }(i));
-	}
+
+13. 数组中不要存在空元素；
+
+		// not good
+		var a = [1, , , 2, 3];
+		
+		// not good
+		var nums = [];
+
+14. 不要在循环内部声明函数；
+		
+		for (var i = 0; i < 10; i++) {
+		    (function(i) {
+		        nums[i] = function(j) {
+		            return i + j;
+		        };
+		    }(i));
+		}
+15. 不要像这样使用构造函数，例：new function () { ... }, new Object；
 	
 	// not good
 	var singleton = new function() {
@@ -945,62 +1060,256 @@
 	    this.publicMethod2 = function() {
 	        privateVar = 2;
 	    };
-	};
+	};		
 
-十六，杂项
+十六，杂项  
 
-	不要混用tab和space；
+1. 不要混用tab和space；
+	
+		// not good  
+		var a   = 1;
+	
+2. 不要在一处使用多个tab或space；
 
-	不要在一处使用多个tab或space；
+3. 换行符统一用'LF'；  
 	
-	换行符统一用'LF'；
+4. 对上下文this的引用只能使用'_this', 'that', 'self'其中一个来命名；
 	
-	对上下文this的引用只能使用'_this', 'that', 'self'其中一个来命名；
+		function Person() {
+		    // not good
+		    var me = this;
+		
+		    // good
+		    var _this = this;
+		
+		    // good
+		    var that = this;
+		
+		    // good
+		    var self = this;
+		}
+
+5. 行尾不要有空白字符；
 	
-	行尾不要有空白字符；
+6. switch的falling through和no default的情况一定要有注释特别说明；
+
+		switch (condition) {
+		    case 1:
+		    case 2:
+		        ...
+		        break;
+		    case 3:
+		        ...
+		    // why fall through
+		    case 4
+		        ...
+		        break;
+		    // why no default
+		}
+
+7. 不允许有空的代码块。
 	
-	switch的falling through和no default的情况一定要有注释特别说明；
+		if (condition) {
 	
-	不允许有空的代码块。
+		}
+
+8. 清空数组使用 .length = 0。
+	
+9. 使用 parseInt 时，必须指定进制。
 
 	
-	
-	// not good
-	var a   = 1;
-	
-	function Person() {
-	    // not good
-	    var me = this;
-	
+		示例：
+	    
 	    // good
-	    var _this = this;
-	
+	    parseInt(str, 10);
+	    
+	    // bad
+	    parseInt(str);
+
+10. number 去除小数点，使用 Math.floor / Math.round / Math.ceil，不使用 parseInt。
+
+		示例：
+
 	    // good
-	    var that = this;
-	
+	    var num = 3.14;
+	    Math.ceil(num);
+	    
+	    // bad
+	    var num = 3.14;
+	    parseInt(num, 10);
+
+11. 转换成 boolean 时，使用 !!。
+
+		示例：
+
+	    var num = 3.14;
+	    !!num;
+
+12. string 转换成 number，要转换的字符串结尾包含非数字并期望忽略时，使用 parseInt。
+
+	    示例：
+    
+	    var width = '200px';
+	    parseInt(width, 10);
+
+13. 转换成 number 时，通常使用 +。
+
+		示例：
+
 	    // good
-	    var self = this;
-	}
+	    +str;
+	    
+	    // bad
+	    Number(str);
+
+14. 转换成 string 时，使用 + ''。
+
+		示例：
+    
+	    // good
+	    num + '';
+	    
+	    // bad
+	    new String(num);
+	    num.toString();
+	    String(num);
+
+15. 类型检测优先使用 typeof。对象类型检测使用 instanceof。null 或 undefined 的检测使用 == null。 
+ 
+		示例：  
+
+	    // string
+	    typeof variable === 'string'
+	    
+	    // number
+	    typeof variable === 'number'
+	    
+	    // boolean
+	    typeof variable === 'boolean'
+	    
+	    // Function
+	    typeof variable === 'function'
+	    
+	    // Object
+	    typeof variable === 'object'
+	    
+	    // RegExp
+	    variable instanceof RegExp
+	    
+	    // Array
+	    variable instanceof Array
+	    
+	    // null
+	    variable === null
+	    
+	    // null or undefined
+	    variable == null
+	    
+	    // undefined
+	    typeof variable === 'undefined'
+
+16. 在语句的行长度超过 120 时，根据逻辑条件合理缩进。
+
+		示例：
+		
+			// 较复杂的逻辑条件组合，将每个条件独立一行，逻辑运算符放置在行首进行分隔，或将部分逻辑按逻辑组合进行分隔。
+			// 建议最终将右括号 ) 与左大括号 { 放在独立一行，保证与 if 内语句块能容易视觉辨识。
+			if (user.isAuthenticated()
+			    && user.isInRole('admin')
+			    && user.hasAuthority('add-admin')
+			    || user.hasAuthority('delete-admin')
+			) {
+			    // Code
+			}
+		
+			// 按一定长度截断字符串，并使用 + 运算符进行连接。
+			// 分隔字符串尽量按语义进行，如不要在一个完整的名词中间断开。
+			// 特别的，对于HTML片段的拼接，通过缩进，保持和HTML相同的结构。
+			var html = '' // 此处用一个空字符串，以便整个HTML片段都在新行严格对齐
+			    + '<article>'
+			    +     '<h1>Title here</h1>'
+			    +     '<p>This is a paragraph</p>'
+			    +     '<footer>Complete</footer>'
+			    + '</article>';
+			
+			// 也可使用数组来进行拼接，相对 + 更容易调整缩进。
+			var html = [
+			    '<article>',
+			        '<h1>Title here</h1>',
+			        '<p>This is a paragraph</p>',
+			        '<footer>Complete</footer>',
+			    '</article>'
+			];
+			html = html.join('');
+			
+			// 当参数过多时，将每个参数独立写在一行上，并将结束的右括号 ) 独立一行。
+			// 所有参数必须增加一个缩进。
+			foo(
+			    aVeryVeryLongArgument,
+			    anotherVeryLongArgument,
+			    callback
+			);
+		
+			// 也可以按逻辑对参数进行组合。
+			// 最经典的是baidu.format函数，调用时将参数分为“模板”和“数据”两块
+			baidu.format(
+			    dateFormatTemplate,
+			    year, month, date, hour, minute, second
+			);
+			
+			// 当函数调用时，如果有一个或以上参数跨越多行，应当每一个参数独立一行。
+			// 这通常出现在匿名函数或者对象初始化等作为参数时，如setTimeout函数等。
+			setTimeout(
+			    function () {
+			        alert('hello');
+			    },
+			    200
+			);
+			
+			order.data.read(
+			    'id=' + me.model.id, 
+			    function (data) {
+			        me.attchToModel(data.result);
+			        callback();
+			    }, 
+			    300
+			);
+		
+			// 链式调用较长时采用缩进进行调整。
+			$('#items')
+			    .find('.selected')
+			    .highlight()
+			    .end();
+			
+			// 三元运算符由3部分组成，因此其换行应当根据每个部分的长度不同，形成不同的情况。
+			var result = thisIsAVeryVeryLongCondition
+			    ? resultA : resultB;
+			
+			var result = condition
+			    ? thisIsAVeryVeryLongResult
+			    : resultB;
+			
+			// 数组和对象初始化的混用，严格按照每个对象的 { 和结束 } 在独立一行的风格书写。
+			var array = [
+			    {
+			        // ...
+			    },
+			    {
+			        // ...
+			    }
+			];
+
+ 
 	
-	// good
-	switch (condition) {
-	    case 1:
-	    case 2:
-	        ...
-	        break;
-	    case 3:
-	        ...
-	    // why fall through
-	    case 4
-	        ...
-	        break;
-	    // why no default
-	}
+
 	
-	// not good with empty block
-	if (condition) {
 	
-	}
+
+
+
+
+
+
 
 
 
