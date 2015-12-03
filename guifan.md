@@ -139,7 +139,7 @@
 
 具体看
 
-- 链接 ： [文字](https://hsivonen.fi/doctype/)
+- 链接 ： [IE兼容模式](https://hsivonen.fi/doctype/)
 
 
 
